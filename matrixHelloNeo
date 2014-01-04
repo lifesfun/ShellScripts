@@ -1,0 +1,44 @@
+#!/bin/bash
+name=$1
+sleep 4
+chvt 2
+clear
+PS1="  " 
+setterm -foreground green 
+sleep 5 
+clear
+echo "Wake up $name"
+sleep 2 
+clear
+echo "Wake up $name.."
+sleep 5 
+clear
+echo "I know you can hear me..."
+sleep 4 
+clear
+echo "Follow."
+sleep 1 
+clear
+echo "the.."
+sleep 1 
+clear
+echo "White Rabbit..."
+sleep 2 
+clear
+echo "Knock Knock"
+sleep 1
+clear
+echo "Knock Knock.."
+sleep 1 
+clear
+echo "Knock Knock..."
+clear
+sleep 1 
+echo "Knock Knock...."
+sleep 3 
+clear
+echo "KNOCK KNOCK"
+sleep 1 
+clear
+head -n 300 /bin/sh
+chvt 1

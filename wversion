@@ -1,0 +1,22 @@
+#!/bin/bash
+#create folder if does not exist and tarball
+#moves current work folder to backup with a time
+#create archive or last backup
+#create last save
+
+location=/var/www/backup/workspace/
+day="$(date +%a%b%d)"
+ti="$(date +%R)"
+
+if [ ! -d "$location" ] ; then
+	mkdir -p $location  && m="********************\nWelcome to your new workspace $location\n********************\n"
+fi
+if [ ! -d "$location$day" ] ; then 
+	mkdir -p "$location""$day"/
+	m="$m \n   I set the workspace '$day' for your work today :)\n\n"
+fi
+mkdir -p $location/$day/$ti/  
+rsync -rt $location/../../html/* "$location"/"$day"/"$ti"/ 
+m="$m\n****Your work has been saved at the current local time: $ti****\n"
+echo -e "$m \n         	       	Don't worry!\n         	       	your safe :P" | write dejong
+m=''

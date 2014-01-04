@@ -1,0 +1,13 @@
+#!/bin/bash
+. /var/lifesfun/serverNs2/.ns2rc
+if [ -n "$1" ] && [ -d "$baseNs2"/"$1" ] ; then
+	cp "$baseNs2"/ns2/ns2/shine/UserConfig.json "$baseNs2"/nsl/ns2/shine/UserConfig.json
+
+
+	cp "$baseNs2"/ns2/ns2/ServerAdmin.json "$baseNs2"/nsl/ns2/ServerAdmin.json
+
+	fmtJson "$baseNs2"/"$1" 
+	lftp -e "mirror -R --no-perms --use-cache --parallel=10 "$baseNs2"/"$1" . ; exit" -p "$portNs2" -u "$usrNs2","$passwdNs2" "$ipNs2":"$remoteNs2"  
+else
+	echo "Need to specify an existing local directory to push" >&2 && exit 1
+fi

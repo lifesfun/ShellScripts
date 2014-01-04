@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+cat "$1" | grep -v ":" | grep   "\".*\"" | tr -d " " | tr -d "," | sort -u | tr  "\n" ", " > /var/lifesfun/serverNs2/ModIds
+
+

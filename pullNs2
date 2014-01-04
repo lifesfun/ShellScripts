@@ -1,0 +1,12 @@
+#!/bin/bash
+. /var/lifesfun/serverNs2/.ns2rc
+if [ -n "$1" ] && [ -d "$baseNs2"/"$1" ] ; then
+	lftp -p "$portNs2" -u "$usrNs2","$passwdNs2" "$ipNs2" << EOF
+		mirror -r --delete --parallel=10 -x '.*txt' -x '.*hashes' "$remoteNs2"/ns2 "$baseNs2"/"$1"/ns2 
+		mirror --parallel=10 --use-cache -i '.*json' -x '.*txt' "$remoteNs2"/ns2/shine "$baseNs2"/"$1"/ns2/shine 
+	quit 0
+EOF
+	getModIds "$baseNs2"/"$1"/ns2/MapCycle.json
+else
+	echo "You need to specify an existing local directory to pull" >&2 && exit 1
+fi

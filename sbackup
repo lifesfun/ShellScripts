@@ -1,0 +1,15 @@
+#!/bin/bash
+#temporary backup:
+
+#compress files from /var/www/html/ and backup to hills backup
+#compress files from hills and backup to /home/dejong/hbackup
+
+
+rsync -raz --stats --delete /var/www/html /var/www/backup/archive /var/www/backup/workspace ndejong@hills.ccsf.edu:backup
+rsync -raz --stats --delete ndejong@hills.ccsf.edu:public_html /var/www/backup/settings/
+cd /var/www/backup/settings
+rsync -r /var/www/html /var/www/backup/workspace . 
+tar -czf ../archive/settings.tar.gz * && rm -rf /var/www/backup/settings/*
+
+cd ~-
+echo -e "\n	Backup completed for today, sir!!  :-)\n\n\n		     Love,\n\n 	       Your Fellow Computer" | write dejong

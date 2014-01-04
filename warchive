@@ -1,0 +1,12 @@
+#!/bin/bash
+#archive
+
+archive=/var/www/backup/archive/webworkspace
+workspace=/var/www/backup/workspace
+cd $workspace
+find . -type d -empty &> /dev/null && . /sbin/personal/wversion
+gunzip "$archive".tar.gz
+tar rf "$archive".tar * && rm -rf "$workspace"/* 
+gzip "$archive".tar
+cd ~- 
+ echo -e "\n    Neil :)\n\n    I just finished archiving your work for this week\n\n			Have a good day!" | write dejong
