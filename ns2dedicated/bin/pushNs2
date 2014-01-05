@@ -1,0 +1,7 @@
+#!/bin/bash
+if [ -n "$1" ] && [ -d "$baseNs2"/"$1" ] ; then
+	fmtJson "$baseNs2"/"$1" 
+	lftp -e "mirror -R --no-perms --use-cache --parallel=10 "$baseNs2"/"$1" . ; exit" -p "$portNs2" -u "$usrNs2","$passwdNs2" "$ipNs2":"$remoteNs2"  
+else
+	echo "Need to specify an existing local directory to push" >&2 && exit 1
+fi

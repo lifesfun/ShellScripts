@@ -1,0 +1,10 @@
+#!/bin/bash
+echo "$baseNs2"
+if [ -n "$1" ] && [ -d "$baseNs2"/"$1" ] ; then
+	lftp -p "$portNs2" -u "$usrNs2","$passwdNs2" "$ipNs2" << EOF
+		mirror -r --delete --parallel=10 -i '.*json' "$remoteNs2"/ns2 "$baseNs2"/"$1"/ns2 
+	quit 0
+EOF
+else
+	echo "You need to specify an existing local directory to pull" >&2 && exit 1
+fi

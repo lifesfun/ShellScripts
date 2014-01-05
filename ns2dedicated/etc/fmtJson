@@ -1,0 +1,25 @@
+#!/bin/bash
+echo "Formating..."
+for args in "$@" ; do
+	for file in $(find "$args" -type f) ; do
+		if echo "$file" | grep -q ".json$" && [ -f "$file" ] ; then 
+			while "true"  ; do
+			    	if python -m json.tool "$file" > /tmp/"$$tmp" ; then
+					mv  /tmp/"$$tmp" "$file"
+					shift
+					break
+				else
+					read -p "Open file?: " x
+					[ $x == "y" ] && vi "$file" 
+					[ $x == "n" ] && break 
+					shift
+				fi
+			done
+		else
+			shift
+			continue
+		fi
+		echo -n ">" 
+	done
+done
+echo " Formatting complete"

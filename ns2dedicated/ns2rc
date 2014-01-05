@@ -1,0 +1,15 @@
+#sysVars
+export rootNs2=$HOME
+export baseNs2="$rootNs2"/srv
+
+#remoteVars
+export ipNs2='23.94.11.50'
+export portNs2='2222'
+export passwdNs2=$(cut -d';' -f2 "$rootNs2"/.passwd | cut -d':' -f2)
+export usrNs2=$(cut -d';' -f1 "$rootNs2"/.passwd | cut -d':' -f2)
+export remoteNs2=/"$ipNs2"_port_27015 
+
+#Functions and Commands
+
+export PATH=$PATH:"$rootNs2"/bin
+export PATH=$PATH:"$rootNs2"/etc

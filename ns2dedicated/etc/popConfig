@@ -1,0 +1,21 @@
+#!/bin/bash -xv
+for versn in $@ ; do
+	p="$baseNs2"/"$versn"
+	echo $p
+	[ -f "$p" ] || echo "The file '$p' does not exist" >&2 && break 
+
+	find "$versn" -name "*$baseNs2*" -exec <<EOF
+EOF
+done
+
+#		read -p "Are you sure you want to replace these files?" x
+#		if [ x == "y" ] ; then 
+#
+#			find $p -name "*$baseNs2*" -exec <<EOF
+#				echo ""$p" {}" ;
+#				
+#				read -p "Open '{}?" x ;
+#				[ x == "y" ] && vi {} \;
+#EOF 
+#		fi 
+#		\;

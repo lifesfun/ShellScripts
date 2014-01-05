@@ -1,0 +1,16 @@
+#!/bin/bash
+
+for file in $@ ; do
+
+	base=$(basename "$file")
+
+	find . ! -samefile "$file" -name "*"$base"*" 
+	read -p "Are you sure you want to replace these files?" x
+
+	if [ "$x" == 'y' ] ; then
+
+		find . ! -samefile "$file" -name "*"$base"*" -exec cp "$file" {} \;
+
+	fi		
+
+done
